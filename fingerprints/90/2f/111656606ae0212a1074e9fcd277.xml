@@ -1,0 +1,26 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<fingerprint>
+  <timestamp>2018-04-12 02:13:09.203 UTC</timestamp>
+  <original>
+    <name>cicd-aws-jenkins</name>
+    <number>8</number>
+  </original>
+  <md5sum>902f111656606ae0212a1074e9fcd277</md5sum>
+  <fileName>Docker image sha256:902f111656606ae0212a1074e9fcd277b933a8bf4c16e00d537387213cabeff7</fileName>
+  <usages/>
+  <facets>
+    <org.jenkinsci.plugins.docker.commons.fingerprint.DockerDescendantFingerprintFacet plugin="docker-commons@1.11">
+      <timestamp>1523499189203</timestamp>
+      <imageId>sha256:902f111656606ae0212a1074e9fcd277b933a8bf4c16e00d537387213cabeff7</imageId>
+      <usages>
+        <entry>
+          <string>cicd-aws-jenkins</string>
+          <ranges>8</ranges>
+        </entry>
+      </usages>
+      <descendantImageIds class="sorted-set">
+        <string>sha256:5cf97338da1d9204fa15b336ca20169ad5cf93a65209d14fa86f7df633714302</string>
+      </descendantImageIds>
+    </org.jenkinsci.plugins.docker.commons.fingerprint.DockerDescendantFingerprintFacet>
+  </facets>
+</fingerprint>

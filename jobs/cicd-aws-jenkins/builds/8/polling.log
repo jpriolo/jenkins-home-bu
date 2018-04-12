@@ -1,0 +1,9 @@
+Started on Apr 12, 2018 2:13:00 AM
+Using strategy: Default
+[poll] Last Built Revision: Revision ff4cb3b058d436d0d761c3180695dbc3354682c9 (refs/remotes/origin/master)
+ > git --version # timeout=10
+ > git ls-remote -h https://github.com/jpriolo/cicd-aws-jenkins.git # timeout=10
+Found 1 remote heads on https://github.com/jpriolo/cicd-aws-jenkins.git
+[poll] Latest remote head revision on refs/heads/master is: d1c5afd308a582c8aeebe77d7fb6a095eda687d7
+Done. Took 0.19 sec
+Changes found

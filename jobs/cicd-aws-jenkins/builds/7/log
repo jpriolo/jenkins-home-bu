@@ -1,0 +1,184 @@
+Started by an SCM change
+Building in workspace /var/lib/jenkins/workspace/cicd-aws-jenkins
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jpriolo/cicd-aws-jenkins.git # timeout=10
+Fetching upstream changes from https://github.com/jpriolo/cicd-aws-jenkins.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/jpriolo/cicd-aws-jenkins.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision ff4cb3b058d436d0d761c3180695dbc3354682c9 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ff4cb3b058d436d0d761c3180695dbc3354682c9
+Commit message: "Update index.php"
+ > git rev-list --no-walk 585e25079f786a497719cba3a8afa0d528a5c395 # timeout=10
+[cicd-aws-jenkins] $ /bin/bash /tmp/jenkins7126199622615749643.sh
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Login Succeeded
+[cicd-aws-jenkins] $ docker build -t 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_7 --pull=true /var/lib/jenkins/workspace/cicd-aws-jenkins
+Sending build context to Docker daemon  236.5kB
+Step 1/7 : FROM alpine:3.4
+3.4: Pulling from library/alpine
+Digest: sha256:2532609239f3a96fbc30670716d87c8861b8a1974564211325633ca093b11c0b
+Status: Image is up to date for alpine:3.4
+ ---> c7fc7faf8c28
+Step 2/7 : RUN apk --update add nginx php5-fpm &&     mkdir -p /var/log/nginx &&     touch /var/log/nginx/access.log &&     mkdir -p /run/nginx
+ ---> Using cache
+ ---> df8d3e9cedbc
+Step 3/7 : ADD www /www
+ ---> 735cc8a05145
+Step 4/7 : ADD nginx.conf /etc/nginx/
+ ---> aceb6bbed4fa
+Step 5/7 : ADD php-fpm.conf /etc/php5/php-fpm.conf
+ ---> f16ce695146a
+Step 6/7 : EXPOSE 80
+ ---> Running in 631eb02f570b
+Removing intermediate container 631eb02f570b
+ ---> a806138eee43
+Step 7/7 : CMD php-fpm -d variables_order="EGPCS" && (tail -F /var/log/nginx/access.log &) && exec nginx -g "daemon off;"
+ ---> Running in 0e3e95aec383
+Removing intermediate container 0e3e95aec383
+ ---> 63c671b9081e
+Successfully built 63c671b9081e
+Successfully tagged 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_7
+[cicd-aws-jenkins] $ docker tag 63c671b9081e 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:latest
+[cicd-aws-jenkins] $ docker inspect 63c671b9081e
+[cicd-aws-jenkins] $ docker push 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_7
+The push refers to repository [583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world]
+96f6d8d7bda8: Preparing
+8b1713a3d3fb: Preparing
+06c1ca432936: Preparing
+b593180fc87f: Preparing
+e53f74215d12: Preparing
+e53f74215d12: Layer already exists
+b593180fc87f: Layer already exists
+96f6d8d7bda8: Pushed
+8b1713a3d3fb: Pushed
+06c1ca432936: Pushed
+v_7: digest: sha256:fdd46db85751097551a9301f57362f09aab0f1cb3ad7d8312e0f605bb61a6dd3 size: 1363
+[cicd-aws-jenkins] $ docker push 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:latest
+The push refers to repository [583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world]
+96f6d8d7bda8: Preparing
+8b1713a3d3fb: Preparing
+06c1ca432936: Preparing
+b593180fc87f: Preparing
+e53f74215d12: Preparing
+b593180fc87f: Layer already exists
+8b1713a3d3fb: Layer already exists
+e53f74215d12: Layer already exists
+06c1ca432936: Layer already exists
+96f6d8d7bda8: Layer already exists
+latest: digest: sha256:fdd46db85751097551a9301f57362f09aab0f1cb3ad7d8312e0f605bb61a6dd3 size: 1363
+[cicd-aws-jenkins] $ /bin/bash /tmp/jenkins5083317971201167363.sh
+{
+    "taskDefinition": {
+        "status": "ACTIVE", 
+        "family": "hello-world", 
+        "placementConstraints": [], 
+        "requiresAttributes": [
+            {
+                "name": "com.amazonaws.ecs.capability.ecr-auth"
+            }
+        ], 
+        "compatibilities": [
+            "EC2"
+        ], 
+        "volumes": [], 
+        "taskDefinitionArn": "arn:aws:ecs:us-west-2:583396343160:task-definition/hello-world:2", 
+        "containerDefinitions": [
+            {
+                "environment": [], 
+                "name": "hello-world", 
+                "mountPoints": [], 
+                "image": "583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_7", 
+                "cpu": 10, 
+                "portMappings": [
+                    {
+                        "protocol": "tcp", 
+                        "containerPort": 80, 
+                        "hostPort": 80
+                    }
+                ], 
+                "memory": 256, 
+                "essential": true, 
+                "volumesFrom": []
+            }
+        ], 
+        "revision": 2
+    }
+}
+entered existing service
+{
+    "service": {
+        "status": "ACTIVE", 
+        "taskDefinition": "arn:aws:ecs:us-west-2:583396343160:task-definition/hello-world:2", 
+        "pendingCount": 0, 
+        "launchType": "EC2", 
+        "loadBalancers": [], 
+        "placementConstraints": [], 
+        "createdAt": 1523490862.992, 
+        "desiredCount": 1, 
+        "serviceName": "hello-world-service", 
+        "clusterArn": "arn:aws:ecs:us-west-2:583396343160:cluster/getting-started", 
+        "serviceArn": "arn:aws:ecs:us-west-2:583396343160:service/hello-world-service", 
+        "deploymentConfiguration": {
+            "maximumPercent": 200, 
+            "minimumHealthyPercent": 100
+        }, 
+        "deployments": [
+            {
+                "status": "PRIMARY", 
+                "pendingCount": 0, 
+                "launchType": "EC2", 
+                "createdAt": 1523492832.53, 
+                "desiredCount": 1, 
+                "taskDefinition": "arn:aws:ecs:us-west-2:583396343160:task-definition/hello-world:2", 
+                "updatedAt": 1523492832.53, 
+                "id": "ecs-svc/9223370513361943277", 
+                "runningCount": 0
+            }, 
+            {
+                "status": "ACTIVE", 
+                "pendingCount": 0, 
+                "launchType": "EC2", 
+                "createdAt": 1523490862.992, 
+                "desiredCount": 1, 
+                "taskDefinition": "arn:aws:ecs:us-west-2:583396343160:task-definition/hello-world:1", 
+                "updatedAt": 1523490862.992, 
+                "id": "ecs-svc/9223370513363912815", 
+                "runningCount": 1
+            }
+        ], 
+        "events": [
+            {
+                "message": "(service hello-world-service) has reached a steady state.", 
+                "id": "ab9e8b95-45d5-4272-988f-99c3521057aa", 
+                "createdAt": 1523492674.107
+            }, 
+            {
+                "message": "(service hello-world-service) has started 1 tasks: (task a9dff75b-c790-4b40-a0ad-c94a3a747c33).", 
+                "id": "2b48f697-ee24-415a-ae71-d1a05958c1fa", 
+                "createdAt": 1523492663.092
+            }, 
+            {
+                "message": "(service hello-world-service) was unable to place a task because no container instance met all of its requirements. Reason: No Container Instances were found in your cluster. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.", 
+                "id": "8662396a-5d26-4eb0-91c8-5f912aef7a0f", 
+                "createdAt": 1523492529.768
+            }, 
+            {
+                "message": "(service hello-world-service) has reached a steady state.", 
+                "id": "e5f30bba-21ff-44f7-b41b-560a94bda7e8", 
+                "createdAt": 1523490883.42
+            }, 
+            {
+                "message": "(service hello-world-service) has started 1 tasks: (task d5f6d479-a2f2-4b0a-b84c-827f738667fb).", 
+                "id": "365b8854-c198-476a-9bec-3f8c7791a128", 
+                "createdAt": 1523490873.034
+            }
+        ], 
+        "runningCount": 1, 
+        "placementStrategy": []
+    }
+}
+Finished: SUCCESS

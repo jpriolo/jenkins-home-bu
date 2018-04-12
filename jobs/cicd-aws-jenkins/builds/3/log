@@ -1,0 +1,19 @@
+Started by user [8mha:////4CYvHlujDldhFa6hxDHGGcsWW/d7ifkZKNdqUETUMtakAAAAmR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAymEgZe/dLi1CL9rIKizPycfAAVOTTpwgAAAA==[0mJP
+Building in workspace /var/lib/jenkins/workspace/cicd-aws-jenkins
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jpriolo/cicd-aws-jenkins.git # timeout=10
+Fetching upstream changes from https://github.com/jpriolo/cicd-aws-jenkins.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/jpriolo/cicd-aws-jenkins.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision b7003441299a71b1e8376ce916e92d2859ac28b4 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b7003441299a71b1e8376ce916e92d2859ac28b4
+Commit message: "First commit"
+ > git rev-list --no-walk b7003441299a71b1e8376ce916e92d2859ac28b4 # timeout=10
+[cicd-aws-jenkins] $ /bin/bash /tmp/jenkins8865563868700460694.sh
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Login Succeeded
+Finished: SUCCESS

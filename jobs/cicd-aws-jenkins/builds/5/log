@@ -1,0 +1,93 @@
+Started by user [8mha:////4CYvHlujDldhFa6hxDHGGcsWW/d7ifkZKNdqUETUMtakAAAAmR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAymEgZe/dLi1CL9rIKizPycfAAVOTTpwgAAAA==[0mJP
+Building in workspace /var/lib/jenkins/workspace/cicd-aws-jenkins
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jpriolo/cicd-aws-jenkins.git # timeout=10
+Fetching upstream changes from https://github.com/jpriolo/cicd-aws-jenkins.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/jpriolo/cicd-aws-jenkins.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 585e25079f786a497719cba3a8afa0d528a5c395 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 585e25079f786a497719cba3a8afa0d528a5c395
+Commit message: "Create launch-file"
+ > git rev-list --no-walk 585e25079f786a497719cba3a8afa0d528a5c395 # timeout=10
+[cicd-aws-jenkins] $ /bin/bash /tmp/jenkins587945920317772342.sh
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Login Succeeded
+[cicd-aws-jenkins] $ docker build -t 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_5 --pull=true /var/lib/jenkins/workspace/cicd-aws-jenkins
+Sending build context to Docker daemon  228.4kB
+Step 1/7 : FROM alpine:3.4
+3.4: Pulling from library/alpine
+81033e7c1d6a: Pulling fs layer
+81033e7c1d6a: Verifying Checksum
+81033e7c1d6a: Download complete
+81033e7c1d6a: Pull complete
+Digest: sha256:2532609239f3a96fbc30670716d87c8861b8a1974564211325633ca093b11c0b
+Status: Downloaded newer image for alpine:3.4
+ ---> c7fc7faf8c28
+Step 2/7 : RUN apk --update add nginx php5-fpm &&     mkdir -p /var/log/nginx &&     touch /var/log/nginx/access.log &&     mkdir -p /run/nginx
+ ---> Running in 4af5eb405d7b
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.4/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.4/community/x86_64/APKINDEX.tar.gz
+(1/6) Installing nginx-common (1.10.3-r0)
+Executing nginx-common-1.10.3-r0.pre-install
+(2/6) Installing pcre (8.38-r1)
+(3/6) Installing nginx (1.10.3-r0)
+(4/6) Installing php5-common (5.6.35-r0)
+(5/6) Installing libxml2 (2.9.5-r0)
+(6/6) Installing php5-fpm (5.6.35-r0)
+Executing busybox-1.24.2-r14.trigger
+OK: 29 MiB in 17 packages
+Removing intermediate container 4af5eb405d7b
+ ---> df8d3e9cedbc
+Step 3/7 : ADD www /www
+ ---> 867102e3cadc
+Step 4/7 : ADD nginx.conf /etc/nginx/
+ ---> e85b5a00a1ba
+Step 5/7 : ADD php-fpm.conf /etc/php5/php-fpm.conf
+ ---> ba556be7868d
+Step 6/7 : EXPOSE 80
+ ---> Running in 937d5ebc6d00
+Removing intermediate container 937d5ebc6d00
+ ---> 24550dca4b4a
+Step 7/7 : CMD php-fpm -d variables_order="EGPCS" && (tail -F /var/log/nginx/access.log &) && exec nginx -g "daemon off;"
+ ---> Running in df1539800060
+Removing intermediate container df1539800060
+ ---> 3ae086438a46
+Successfully built 3ae086438a46
+Successfully tagged 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_5
+[cicd-aws-jenkins] $ docker tag 3ae086438a46 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:latest
+[cicd-aws-jenkins] $ docker inspect 3ae086438a46
+[cicd-aws-jenkins] $ docker push 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:v_5
+The push refers to repository [583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world]
+64593e7d0cf6: Preparing
+f2685bcf8be5: Preparing
+f5e583ede693: Preparing
+b593180fc87f: Preparing
+e53f74215d12: Preparing
+64593e7d0cf6: Pushed
+f5e583ede693: Pushed
+f2685bcf8be5: Pushed
+e53f74215d12: Pushed
+b593180fc87f: Pushed
+v_5: digest: sha256:796dfa59ac9355339591a8493d5c3b9c4f15962db5d58978a2e5cdac319f2aae size: 1363
+[cicd-aws-jenkins] $ docker push 583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world:latest
+The push refers to repository [583396343160.dkr.ecr.us-west-2.amazonaws.com/hello-world]
+64593e7d0cf6: Preparing
+f2685bcf8be5: Preparing
+f5e583ede693: Preparing
+b593180fc87f: Preparing
+e53f74215d12: Preparing
+f5e583ede693: Layer already exists
+e53f74215d12: Layer already exists
+64593e7d0cf6: Layer already exists
+b593180fc87f: Layer already exists
+f2685bcf8be5: Layer already exists
+latest: digest: sha256:796dfa59ac9355339591a8493d5c3b9c4f15962db5d58978a2e5cdac319f2aae size: 1363
+[cicd-aws-jenkins] $ /bin/bash /tmp/jenkins4434884340710732672.sh
+/tmp/jenkins4434884340710732672.sh: line 5: syntax error near unexpected token `newline'
+/tmp/jenkins4434884340710732672.sh: line 5: `REPOSITORY_NAME=<hello-world>'
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
